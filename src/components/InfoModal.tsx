@@ -1,5 +1,5 @@
-import { X, Sparkles, Calendar, Newspaper } from 'lucide-react';
-import { type GalleryEntry } from '../types';
+import { X, Sparkles, Calendar, Newspaper, BadgeInfo } from "lucide-react";
+import { type GalleryEntry } from "../types";
 
 interface InfoModalProps {
   entry: GalleryEntry;
@@ -8,12 +8,12 @@ interface InfoModalProps {
 
 export const InfoModal = ({ entry, onClose }: InfoModalProps) => {
   const formatDate = (timestamp: string) => {
-    return new Date(timestamp).toLocaleDateString('it-IT', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
+    return new Date(timestamp).toLocaleDateString("it-IT", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
     });
   };
 
@@ -23,7 +23,7 @@ export const InfoModal = ({ entry, onClose }: InfoModalProps) => {
       onClick={onClose}
     >
       <div
-        className="bg-slate-800 rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl"
+        className="bg-slate-800 rounded-2xl max-w-6xl w-full max-h-[85vh] overflow-y-auto shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="p-6 space-y-6">
@@ -44,9 +44,9 @@ export const InfoModal = ({ entry, onClose }: InfoModalProps) => {
 
           {/* Image Preview */}
           <div className="rounded-lg overflow-hidden">
-            <img 
-              src={entry.image_url} 
-              alt="Generated image" 
+            <img
+              src={entry.image_url}
+              alt="Generated image"
               className="w-full h-auto max-w-[100px] object-cover"
             />
           </div>
@@ -62,27 +62,31 @@ export const InfoModal = ({ entry, onClose }: InfoModalProps) => {
             </div>
           </div>
 
-          {/* News Sources */}
+          {/* News Titles */}
           <div>
             <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
               <Newspaper className="text-purple-400 w-5 h-5" />
-              News Sources
+              News Titles
             </h3>
-            <div className="space-y-2">
+            <ul className="mt-4 list-disc list-inside text-purple-300 text-sm">
               {entry.news_titles.map((title, i) => (
-                <div 
-                  key={i} 
-                  className="flex items-start gap-3 bg-slate-900/30 rounded-lg p-3"
-                >
-                  <span className="text-purple-400 mt-1 text-lg">•</span>
-                  <span className="text-gray-300 flex-1">{title}</span>
-                </div>
+                <li key={i} className="text-gray-300">
+                  {title}
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
 
           {/* Date */}
           <div className="border-t border-slate-700 pt-4">
+            {import.meta.env.VITE_RSS_FEED_URL && (
+              <div className="flex items-center gap-2 text-gray-400 text-sm mb-2">
+                <BadgeInfo className="w-4 h-4" />
+                <span>
+                  These titles are collected from: <b>{import.meta.env.VITE_RSS_FEED_URL}</b>
+                </span>
+              </div>
+            )}
             <div className="flex items-center gap-2 text-gray-400 text-sm">
               <Calendar className="w-4 h-4" />
               <span>Generated on {formatDate(entry.timestamp)}</span>

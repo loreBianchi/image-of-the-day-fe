@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { Header } from './components/Header';
 import { GalleryCard } from './components/GalleryCard';
+import { Layout } from './components/Layout';
 import { Lightbox } from './components/Lightbox';
 import { InfoModal } from './components/InfoModal';
 import { useGalleryData } from './hooks/useGalleryData';
 import { type GalleryEntry } from './types';
 import { Sparkles } from 'lucide-react';
+import { WorkflowDesc } from './components/WorflowDesc';
 
 function App() {
   const { images, loading } = useGalleryData();
@@ -14,20 +16,24 @@ function App() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
-        <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-purple-500 mb-4"></div>
-          <p className="text-white text-xl">Loading Gallery...</p>
+      <Layout>
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="text-center">
+            <div className="inline-block animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-purple-500 mb-4"></div>
+            <p className="text-white text-xl">Loading Gallery...</p>
+          </div>
         </div>
-      </div>
+      </Layout>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <Layout>
       <Header />
+      <WorkflowDesc />
 
       <main className="container mx-auto px-4 pb-16">
+        <h2 className="text-3xl font-bold text-white mb-8 text-center">Gallery</h2>
         {images.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {images.map((entry, idx) => (
@@ -62,7 +68,7 @@ function App() {
           onClose={() => setInfoModalEntry(null)} 
         />
       )}
-    </div>
+    </Layout>
   );
 }
 
