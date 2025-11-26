@@ -1,4 +1,4 @@
-*# 🖼️ Image of the Day - Frontend
+# 🖼️ Image of the Day - Frontend
 
 Welcome to the Image of the Day gallery! This application is designed to showcase unique, daily art generated entirely by Artificial Intelligence.
 
