@@ -1,7 +1,7 @@
 import { Rss, Zap, Cloud } from "lucide-react";
 
 export const WorkflowDesc = () => (
-  <div className="mb-12 p-6 bg-purple-100 rounded-2xl shadow-xl border border-gray-100 mx-5">
+  <div className="mb-12 p-6 bg-purple-100 rounded-2xl shadow-xl border border-gray-100">
     <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">How It Works</h2>
 
     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
