@@ -1,5 +1,6 @@
 import React from "react";
 import { WorkflowDesc } from "../components/WorflowDesc";
+import { PromptInstructions } from "../components/PromptInstructions";
 
 const About: React.FC = () => {
   return (
@@ -21,6 +22,7 @@ const About: React.FC = () => {
       </ul>
 
       <WorkflowDesc />
+      <PromptInstructions />
     </div>
   );
 };
