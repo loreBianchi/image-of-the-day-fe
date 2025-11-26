@@ -3,4 +3,5 @@ export interface GalleryEntry {
   prompt: string;
   news_titles: string[];
   image_url: string;
+  source?: string;
 }

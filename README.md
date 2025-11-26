@@ -1,73 +1,23 @@
-# React + TypeScript + Vite
+*# 🖼️ Image of the Day - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the Image of the Day gallery! This application is designed to showcase unique, daily art generated entirely by Artificial Intelligence.
 
-Currently, two official plugins are available:
+## About the Project
+This is a live experiment where technology meets news and art. Our goal is to create a dynamic, ephemeral art gallery that changes daily.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+How the Art is Created:
+1. News Inspiration: Every day, the system fetches a current news headline from a global news feed.
+2. AI Art Direction: An internal AI "Art Director" interprets the headline's mood and themes to create a highly descriptive, artistic prompt.
+3. Generation: This custom prompt is then fed into a powerful text-to-image AI model, which generates a unique, high-quality digital artwork.
 
-## React Compiler
+The resulting image is a spontaneous, abstract reflection of the day's global conversation.  
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
+- Daily Changing Gallery: A new, one-of-a-kind image is published every day.
+- Unique Prompts: See the exact artistic prompt used to generate the image, demonstrating the link between news and AI creativity.
+- Simple Interface: A clean, fast application built with React and modern web technologies, hosted globally.
 
-## Expanding the ESLint configuration
+## Live Gallery
+Visit the live application URL to explore today's image: [https://image-of-the-day-fe.pages.dev/](https://image-of-the-day-fe.pages.dev/) 
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+If you're interested in the technology powering this app, check out the [main repository](https://github.com/loreBianchi/image-of-the-day) for the full details on the serverless architecture.
