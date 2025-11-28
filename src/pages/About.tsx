@@ -12,7 +12,7 @@ const About: React.FC = () => {
       </p>
       <p className="mb-4">Each day, our system performs three automatic steps:</p>
       <ul className="list-disc list-inside ml-4 space-y-2 mb-10">
-        <li>We fetch 50 current <i>news headlines</i> using RSS feeds.</li>
+        <li>We fetch current <i>news headlines</i> using RSS feeds.</li>
         <li>We select 5 random headlines from the fetched list.</li>
         <li>We use it to create an AI-optimized "artistic prompt".</li>
         <li>
