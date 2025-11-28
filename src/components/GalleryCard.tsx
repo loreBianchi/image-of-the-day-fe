@@ -1,4 +1,5 @@
 import { Calendar, Info } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { type GalleryEntry } from '../types';
 
 interface GalleryCardProps {
@@ -17,22 +18,37 @@ export const GalleryCard = ({ entry, onImageClick, onInfoClick }: GalleryCardPro
   };
 
   return (
-    <div className="group relative bg-slate-800/50 backdrop-blur-sm rounded-2xl overflow-hidden shadow-2xl hover:shadow-purple-500/50 transition-all duration-300">
-      {/* Image - Click per preview */}
-      <div 
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.4 }}
+      whileHover={{ scale: 1.02 }}
+      className="group relative bg-slate-800/50 backdrop-blur-sm rounded-2xl overflow-hidden shadow-2xl hover:shadow-purple-500/50 transition-all duration-300"
+    >
+      {/* Image */}
+      <motion.div 
         className="aspect-video overflow-hidden cursor-pointer relative"
         onClick={onImageClick}
+        whileHover={{ scale: 1.01 }}
       >
-        <img
+        <motion.img
           src={entry.image_url}
           alt="AI Generated"
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+          className="w-full h-full object-cover"
           loading="lazy"
+          whileHover={{ scale: 1.15 }}
+          transition={{ duration: 0.4 }}
         />
-        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+
+        <motion.div
+          className="absolute inset-0 bg-black/40 opacity-0 flex items-center justify-center"
+          initial={{ opacity: 0 }}
+          whileHover={{ opacity: 1 }}
+        >
           <span className="text-white text-lg font-semibold">Click to preview</span>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* Info Card */}
       <div className="p-4 space-y-3">
@@ -43,26 +59,43 @@ export const GalleryCard = ({ entry, onImageClick, onInfoClick }: GalleryCardPro
         </div>
 
         {/* News Tags */}
-        <div className="flex flex-wrap gap-2">
+        <motion.div 
+          className="flex flex-wrap gap-2"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            hidden: {},
+            visible: {
+              transition: { staggerChildren: 0.05 }
+            }
+          }}
+        >
           {entry.news_titles.slice(0, 3).map((title, i) => (
-            <span
+            <motion.span
               key={i}
               className="px-2 py-1 bg-purple-500/20 text-purple-200 rounded-full text-xs truncate max-w-full"
+              variants={{
+                hidden: { opacity: 0, y: 5 },
+                visible: { opacity: 1, y: 0 }
+              }}
             >
               {title}
-            </span>
+            </motion.span>
           ))}
-        </div>
+        </motion.div>
 
         {/* Info Button */}
-        <button
+        <motion.button
           onClick={onInfoClick}
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.97 }}
           className="w-full py-2 bg-linear-to-r from-purple-500 to-pink-500 text-white rounded-lg font-medium hover:from-purple-600 hover:to-pink-600 transition-all duration-300 shadow-lg hover:shadow-purple-500/50 flex items-center justify-center gap-2"
         >
           <Info className="w-4 h-4" />
           View Details
-        </button>
+        </motion.button>
       </div>
-    </div>
+    </motion.div>
   );
 };

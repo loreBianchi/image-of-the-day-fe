@@ -1,5 +1,6 @@
 import { Sparkles } from "lucide-react";
-import { useState} from "react";
+import { useState } from "react";
+import { motion } from "framer-motion";
 import { GalleryCard } from "../components/GalleryCard";
 import { InfoModal } from "../components/InfoModal";
 import { Lightbox } from "../components/Lightbox";
@@ -15,27 +16,56 @@ const Gallery = () => {
   if (loading) {
     return <Loader text="Loading gallery..." />;
   }
-  
+
+  // Variants for grid + stagger items
+  const gridVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.15
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.35, ease: [0.4, 0, 0.2, 1] as const }
+    }
+  };
+
   return (
     <>
       <h2 className="text-3xl font-bold text-white mb-8 text-center">Gallery</h2>
+
       {images.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          variants={gridVariants}
+          initial="hidden"
+          animate="visible"
+        >
           {images.map((entry, idx) => (
-            <GalleryCard
-              key={idx}
-              entry={entry}
-              onImageClick={() => setLightboxImage(entry.image_url)}
-              onInfoClick={() => setInfoModalEntry(entry)}
-            />
+            <motion.div key={idx} variants={itemVariants}>
+              <GalleryCard
+                entry={entry}
+                onImageClick={() => setLightboxImage(entry.image_url)}
+                onInfoClick={() => setInfoModalEntry(entry)}
+              />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       ) : (
         <div className="text-center py-20">
           <Sparkles className="w-20 h-20 text-purple-400 mx-auto mb-4 animate-pulse" />
           <p className="text-white text-xl">No images yet. Check back soon!</p>
         </div>
       )}
+
       {/* Lightbox */}
       {lightboxImage && (
         <Lightbox imageUrl={lightboxImage} onClose={() => setLightboxImage(null)} />
