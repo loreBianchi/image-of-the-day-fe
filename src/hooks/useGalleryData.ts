@@ -40,7 +40,7 @@ export const useGalleryData = () => {
 
         const response = await fetch(`${r2Url}/gallery_data.json`);
         const data = await response.json();
-        setImages(data.reverse());
+        setImages(data);
       } catch (error) {
         console.error("Error loading gallery:", error);
         setImages(MOCK_DATA);
