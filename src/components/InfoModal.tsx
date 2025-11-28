@@ -81,9 +81,10 @@ export const InfoModal = ({ entry, onClose }: InfoModalProps) => {
           <div className="border-t border-slate-700 pt-4">
             {(import.meta.env.VITE_RSS_FEED_URL || entry.source) && (
               <div className="flex items-center gap-2 text-gray-400 text-sm mb-2">
-                <BadgeInfo className="w-4 h-4" />
-                <span>
-                  These titles are collected from: <b>{entry.source || import.meta.env.VITE_RSS_FEED_URL}</b>
+                <BadgeInfo className="w-4 h-4 shrink-0" />
+                <span className="wrap-break-word whitespace-normal">
+                  These titles are collected from:{" "}
+                  <b className="break-all">{entry.source || import.meta.env.VITE_RSS_FEED_URL}</b>
                 </span>
               </div>
             )}
